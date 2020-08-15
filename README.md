@@ -8,6 +8,10 @@ To install, get the plugin with composer in your roundcube directory
 composer require radialapps/banner-ics
 ```
 
+## Screenshot
+The plugin adds a calendar icon along with the information of the event
+<img src="screenshot.png" alt="Screenshot" width="800"/>
+
 ## License
 Permissively licensed under the MIT license
 
