@@ -1,6 +1,6 @@
 # Roundcube Banner ICS
 
-Displays information about events from ICS attachmetns
+Displays information about events from iCalendar attachmetns
 
 ## Installation
 To install, get the plugin with composer in your roundcube directory
