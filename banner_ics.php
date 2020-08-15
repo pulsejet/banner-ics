@@ -73,9 +73,14 @@ include __DIR__ . '/vendor/autoload.php';
                         
                         // Output
                         $html = '<div class="notice info">';
-                        $html = '<div class="ics-event">';
+                        $html .= '<div class="ics-icon">';
+                        $html .= '<div class="m">' . date_format($dtstart, 'M') . '</div>';
+                        $html .= '<div class="d">' . date_format($dtstart, 'd') . '</div>';
+                        $html .= '<div class="day">' . date_format($dtstart, 'D') . '</div>';
+                        $html .= '</div>';
+                        $html .= '<div class="ics-event">';
                         $html .= '<span class="title">' . htmlspecialchars($event->summary) . '</span>';
-                        $html .= '<br/>' . htmlspecialchars($dtstr);
+                        $html .= '<br/><b>' . htmlspecialchars($dtstr) . '</b>';
                         if (isset($who)) {
                              $html .= '<br/>' . htmlspecialchars($who);
                         }

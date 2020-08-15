@@ -1,10 +1,56 @@
 .ics-event {
     display: block !important;
-    font-size: 1.1em;
+    font-size: 0.9em;
 }
 
 .ics-event .title {
     font-size: 1.2em;
     font-weight: bold;
+}
+
+.ics-icon {
+    font-size: 0.6rem; /* change icon size */
+    display: block;
+    position: relative;
+    width: 5em;
+    height: 7em;
+    background-color: #fff;
+    border-radius: 0.6em;
+    box-shadow: 0 1px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+    overflow: hidden;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+.ics-icon * {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
+
+.ics-icon .m {
+    font-size: 1.3em;
+    position: absolute;
+    top: 0;
+    padding: 0.1em 0;
+    color: #fff;
+    background-color: #007bff;
+}
+
+.ics-icon .day {
+    font-size: 1.1em;
+    position: absolute;
+    bottom: 0.1em;
+    color: black;
+}
+
+.ics-icon .d {
+    font-size: 2.4em;
+    letter-spacing: -0.05em;
+    padding-top: 0.9em;
+    color: black;
 }
 
