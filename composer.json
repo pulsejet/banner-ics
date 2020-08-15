@@ -1,0 +1,19 @@
+{
+    "name": "radialapps/banner-ics",
+    "type": "roundcube-plugin",
+    "description": "Show event preview from ICS attachments",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Varun Patil",
+            "email": "radialapps@gmail.com",
+            "role": "Lead"
+        }
+    ],
+    "require": {
+        "roundcube/plugin-installer": ">=0.1.6",
+        "johngrogg/ics-parser": "^2.1"
+    }
+}
+
