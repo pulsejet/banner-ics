@@ -67,7 +67,7 @@
                 // Get attendees
                 $who = array();
                 foreach (array_merge($event->organizer_array, $event->attendee_array) as &$o) {
-                    if (is_array($o) && array_key_exists('CN', $o)) {
+                    if (is_array($o) && array_key_exists('CN', $o) && !in_array($o['CN'], $who)) {
                         array_push($who, $o['CN']);
                     }
                 }
