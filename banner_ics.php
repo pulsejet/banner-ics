@@ -28,7 +28,7 @@
             $message = $args['message'];
 
             foreach ($message->attachments as &$a) {
-                if ($a->mimetype === 'text/calendar') {
+                if (strtolower($a->mimetype) === 'text/calendar') {
                     try {
                         $this->process_attachment($content, $message, $a);
                     } catch (\Exception $e) {}
