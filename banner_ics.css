@@ -1,3 +1,8 @@
+.ics-event-container {
+    display: flex !important;
+    align-items: center;
+}
+
 .ics-event {
     display: block !important;
     font-size: 0.9em;
@@ -20,6 +25,8 @@
     overflow: hidden;
     margin-right: 18px;
     flex-shrink: 0;
+    padding: 0 !important;
+    min-height: 0 !important;
 }
 
 .ics-icon * {
@@ -29,13 +36,15 @@
     font-weight: bold;
     font-style: normal;
     text-align: center;
+    margin: 0 !important;
+    min-height: 0 !important;
 }
 
 .ics-icon .m {
     font-size: 1.3em;
     position: absolute;
     top: 0;
-    padding: 0.1em 0;
+    padding: 0.1em 0 !important;
     color: #fff;
     background-color: #007bff;
 }
@@ -45,12 +54,13 @@
     position: absolute;
     bottom: 0.1em;
     color: black;
+    padding: 0 !important;
 }
 
 .ics-icon .d {
     font-size: 2.4em;
     letter-spacing: -0.05em;
-    padding-top: 0.9em;
+    padding: 0.9em 0 0 0 !important;
     color: black;
 }
 
