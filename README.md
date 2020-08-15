@@ -10,7 +10,7 @@ composer require radialapps/banner-ics
 
 ## Screenshot
 The plugin adds a calendar icon along with the information of the event
-<img src="screenshot.png" alt="Screenshot" width="800"/>
+<img src="screenshot.png" alt="Screenshot" width="500"/>
 
 ## License
 Permissively licensed under the MIT license
