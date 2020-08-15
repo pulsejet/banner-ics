@@ -52,17 +52,20 @@
 
             // Get first event
             foreach ($ical->events() as &$event) {
-                $dtstart = $ical->iCalDateToDateTime($event->dtstart);
-                $dtend = $ical->iCalDateToDateTime($event->dtend);
-                $dtstr = date_format($dtstart, $format) . ' - ';
+                $dtstart = $event->dtstart_array[2];
+                $dtend = $event->dtend_array[2];
+                $dtstr = date($format, $dtstart) . ' - ';
 
                 // Dont double date if same
                 $df = 'Y-m-d';
                 if (date_format($dtstart, $df) === date_format($dtend, $df)) {
-                    $dtstr = $dtstr . date_format($dtend, 'h:ia');
+                    $dtstr .= date('h:ia', $dtend);
                 } else {
-                    $dtstr = $dtstr . date_format($dtend, $format);
+                    $dtstr .= date($format, $dtend);
                 }
+
+                // Put timezone in date string
+                $dtstr .= ' (' . date('T', $dtstart) . ')';
 
                 // Get attendees
                 $who = array();
@@ -85,9 +88,9 @@
                 // Output
                 $html = '<div class="notice info">';
                 $html .= '<div class="ics-icon">';
-                $html .= '<div class="m">' . date_format($dtstart, 'M') . '</div>';
-                $html .= '<div class="d">' . date_format($dtstart, 'd') . '</div>';
-                $html .= '<div class="day">' . date_format($dtstart, 'D') . '</div>';
+                $html .= '<div class="m">' . date('M', $dtstart) . '</div>';
+                $html .= '<div class="d">' . date('d', $dtstart) . '</div>';
+                $html .= '<div class="day">' . date('D', $dtstart) . '</div>';
                 $html .= '</div>';
                 $html .= '<div class="ics-event">';
                 $html .= '<span class="title">' . htmlspecialchars($event->summary) . '</span>';
