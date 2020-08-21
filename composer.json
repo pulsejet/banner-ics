@@ -3,7 +3,7 @@
     "type": "roundcube-plugin",
     "description": "Show event preview from ICS attachments",
     "license": "MIT",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "authors": [
         {
             "name": "Varun Patil",
