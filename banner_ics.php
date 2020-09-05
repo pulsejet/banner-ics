@@ -58,7 +58,7 @@
 
                 // Dont double date if same
                 $df = 'Y-m-d';
-                if (date_format($dtstart, $df) === date_format($dtend, $df)) {
+                if (date($df, $dtstart) === date($df, $dtend)) {
                     $dtstr .= date('h:ia', $dtend);
                 } else {
                     $dtstr .= date($format, $dtend);
