@@ -3,7 +3,7 @@
  * @author pulsejet
  */
 
-window.rcmail && rcmail.addEventListener('message', function(evt) {
+window.rcmail && rcmail.addEventListener('init', function(evt) {
     // Remove the button classes from the description links
     $('div.ics-event-description a').each(function () {
         const target = this;
