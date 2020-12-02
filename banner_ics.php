@@ -14,6 +14,7 @@
     class banner_ics extends rcube_plugin
     {
         public $task = 'mail';
+		const SHOW_DESCR = true; // This variable controls to show or not description of event
 
         function init()
         {
@@ -99,6 +100,11 @@
                 if (isset($who)) {
                      $html .= '<br/>' . htmlspecialchars($who);
                 }
+				if (self::SHOW_DESCR){
+					$descript = nl2br(htmlspecialchars($event->description));
+					$descript = preg_replace('/&amp;lt;(.*)&amp;gt;/U', '<a href="$1" target="_blank">$1</a>', $descript);
+					$html .= '<hr/>'.$descript.'<hr/>';
+				}
                 $html .= '</div>';
                 $html .= '</div>';
                 array_push($content, $html);
