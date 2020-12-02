@@ -17,11 +17,16 @@
 
         function init()
         {
+            $rcmail = rcmail::get_instance();
+
             $this->load_config('config.inc.php.dist');
             $this->load_config('config.inc.php');
 
             $this->include_stylesheet('banner_ics.css');
-            $this->include_script('banner_ics.js');
+
+            if ($rcmail->config->get('banner_ics_description')) {
+                $this->include_script('banner_ics_description.js');
+            }
 
             $this->add_hook('message_objects', array($this, 'ics_banner'));
         }
