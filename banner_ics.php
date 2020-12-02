@@ -41,7 +41,9 @@
         public function process_attachment(&$content, &$message, &$a)
         {
             $rcmail = rcmail::get_instance();
-            $format = 'D M d, Y h:ia';
+            $date_format = $rcmail->config->get('date_format', 'D M d, Y');
+            $time_format = $rcmail->config->get('time_format', 'h:ia');
+            $combined_format = $date_format . ' ' . $time_format;
 
             // Parse event
             $ics = $message->get_part_body($a->mime_id);
@@ -55,14 +57,14 @@
             foreach ($ical->events() as &$event) {
                 $dtstart = $event->dtstart_array[2];
                 $dtend = $event->dtend_array[2];
-                $dtstr = $rcmail->format_date($dtstart, $format) . ' - ';
+                $dtstr = $rcmail->format_date($dtstart, $combined_format) . ' - ';
 
                 // Dont double date if same
                 $df = 'Y-m-d';
                 if (date($df, $dtstart) === date($df, $dtend)) {
-                    $dtstr .= $rcmail->format_date($dtend, 'h:ia');
+                    $dtstr .= $rcmail->format_date($dtend, $time_format);
                 } else {
-                    $dtstr .= $rcmail->format_date($dtend);
+                    $dtstr .= $rcmail->format_date($dtend, $combined_format);
                 }
 
                 // Put timezone in date string
