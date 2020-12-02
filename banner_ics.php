@@ -19,6 +19,7 @@
         function init()
         {
             $this->include_stylesheet('banner_ics.css');
+            $this->include_script('banner_ics.js');
             $this->add_hook('message_objects', array($this, 'ics_banner'));
         }
 
@@ -100,16 +101,20 @@
                 if (isset($who)) {
                      $html .= '<br/>' . htmlspecialchars($who);
                 }
-                if (self::SHOW_DESCR){
-                    $descript = str_replace("&gt;"," ",$event->description);
-                    $descript = str_replace("&lt;"," ",$descript);
-                    $descript = str_replace("mailto:","",$descript); //rcube_text2html ignores mailto: prefix but makes the link with it, therefore, we can delete mailto:
-                    $text2html = new rcube_text2html($descript, false, array());
-                    $html .= '<hr/>'.$text2html->get_html() .'<hr/>';
-                }
                 $html .= '</div>';
                 $html .= '</div>';
+
                 array_push($content, $html);
+
+                // Optional description block
+                if (self::SHOW_DESCR) {
+                     $html = '<div class="info ics-event-description">';
+                     $text2html = new rcube_text2html(htmlspecialchars_decode($event->description));
+                     $html .= $text2html->get_html();
+                     $html .= '</div>';
+
+                     array_push($content, $html);
+                }
             }
         }
     }
