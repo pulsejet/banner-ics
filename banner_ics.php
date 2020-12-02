@@ -40,6 +40,7 @@
 
         public function process_attachment(&$content, &$message, &$a)
         {
+            $rcmail = rcmail::get_instance();
             $format = 'D M d, Y h:ia';
 
             // Parse event
@@ -54,18 +55,18 @@
             foreach ($ical->events() as &$event) {
                 $dtstart = $event->dtstart_array[2];
                 $dtend = $event->dtend_array[2];
-                $dtstr = date($format, $dtstart) . ' - ';
+                $dtstr = $rcmail->format_date($dtstart, $format) . ' - ';
 
                 // Dont double date if same
                 $df = 'Y-m-d';
                 if (date($df, $dtstart) === date($df, $dtend)) {
-                    $dtstr .= date('h:ia', $dtend);
+                    $dtstr .= $rcmail->format_date($dtend, 'h:ia');
                 } else {
-                    $dtstr .= date($format, $dtend);
+                    $dtstr .= $rcmail->format_date($dtend);
                 }
 
                 // Put timezone in date string
-                $dtstr .= ' (' . date('T', $dtstart) . ')';
+                $dtstr .= ' (' . $rcmail->format_date($dtstart, 'T') . ')';
 
                 // Get attendees
                 $who = array();
