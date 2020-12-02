@@ -87,7 +87,7 @@
                 }
 
                 // Output
-                $html = '<div class="notice info ics-event-container">';
+                $html = '<div class="info ics-event-container">';
                 $html .= '<div class="ics-icon">';
                 $html .= '<div class="m">' . date('M', $dtstart) . '</div>';
                 $html .= '<div class="d">' . date('d', $dtstart) . '</div>';
