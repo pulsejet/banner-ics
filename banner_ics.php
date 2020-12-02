@@ -106,7 +106,6 @@
                 }
                 $html .= '</div>';
                 $html .= '</div>';
-
                 array_push($content, $html);
 
                 // Optional description block
