@@ -14,7 +14,7 @@
 }
 
 .ics-icon {
-    font-size: 0.6rem; /* change icon size */
+    font-size: 0.6em; /* change icon size */
     display: block;
     position: relative;
     width: 5em;
