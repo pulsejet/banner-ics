@@ -1,0 +1,7 @@
+<?php
+
+$config = array();
+
+// Show the description block
+$config['banner_ics_description'] = false;
+

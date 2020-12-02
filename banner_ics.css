@@ -64,3 +64,21 @@
     color: black;
 }
 
+.ics-event-description {
+    overflow-x: auto;
+}
+
+.ics-event-description div {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ics-event-description a {
+    display: inline-block;
+    max-width: 25em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+
