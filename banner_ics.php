@@ -89,9 +89,9 @@
                 // Output
                 $html = '<div class="info ics-event-container">';
                 $html .= '<div class="ics-icon">';
-                $html .= '<div class="m">' . date('M', $dtstart) . '</div>';
-                $html .= '<div class="d">' . date('d', $dtstart) . '</div>';
-                $html .= '<div class="day">' . date('D', $dtstart) . '</div>';
+                $html .= '<div class="m">' . $rcmail->format_date($dtstart, 'M') . '</div>';
+                $html .= '<div class="d">' . $rcmail->format_date($dtstart, 'd') . '</div>';
+                $html .= '<div class="day">' . $rcmail->format_date($dtstart, 'D') . '</div>';
                 $html .= '</div>';
                 $html .= '<div class="ics-event">';
                 $html .= '<span class="title">' . htmlspecialchars($event->summary) . '</span>';
