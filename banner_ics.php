@@ -111,10 +111,9 @@
                 // Optional description block
                 if ($rcmail->config->get('banner_ics_description')) {
                      $html = '<div class="info ics-event-description">';
-                     $text2html = new rcube_text2html(htmlspecialchars_decode($event->description));
-                     $html .= $text2html->get_html();
+                     $description = htmlspecialchars_decode($event->description);
+                     $html .= (new rcube_text2html($description))->get_html();
                      $html .= '</div>';
-
                      array_push($content, $html);
                 }
             }
