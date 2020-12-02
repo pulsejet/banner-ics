@@ -14,12 +14,15 @@
     class banner_ics extends rcube_plugin
     {
         public $task = 'mail';
-        const SHOW_DESCR = true; // This variable controls to show or not description of event
 
         function init()
         {
+            $this->load_config('config.inc.php.dist');
+            $this->load_config('config.inc.php');
+
             $this->include_stylesheet('banner_ics.css');
             $this->include_script('banner_ics.js');
+
             $this->add_hook('message_objects', array($this, 'ics_banner'));
         }
 
@@ -107,7 +110,7 @@
                 array_push($content, $html);
 
                 // Optional description block
-                if (self::SHOW_DESCR) {
+                if ($rcmail->config->get('banner_ics_description')) {
                      $html = '<div class="info ics-event-description">';
                      $text2html = new rcube_text2html(htmlspecialchars_decode($event->description));
                      $html .= $text2html->get_html();
