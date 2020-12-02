@@ -101,9 +101,13 @@
                      $html .= '<br/>' . htmlspecialchars($who);
                 }
                 if (self::SHOW_DESCR){
-                     $descript = nl2br(htmlspecialchars($event->description));
-                     $descript = preg_replace('/&amp;lt;(.*)&amp;gt;/U', '<a href="$1" target="_blank">$1</a>', $descript);
-                     $html .= '<hr/>'.$descript.'<hr/>';
+                    $descript = nl2br($event->description);
+                    //For url in < >
+                    $descript = preg_replace('/&lt;(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})&gt;/Ui', '<a href="$1" target="_blank">$1</a>', $descript);
+                    //For mailto:email
+                    $descript = preg_replace('/([\w\-\_\.]+@[\w-]+\.+[\w\.\-\_]+)&lt;mailto:([\w\-\_\.]+@[\w-]+\.+[\w\.\-\_]+)&gt;/Ui', '<a href="mailto:$1" target="_blank">$1</a>', $descript);
+                    $descript = preg_replace('/&lt;mailto:([\w\-\_\.]+@[\w-]+\.+[\w\.\-\_]+)&gt;/Ui', '<a href="mailto:$1" target="_blank">$1</a>', $descript);
+                    $html .= '<hr/>'.$descript.'<hr/>';
                 }
                 $html .= '</div>';
                 $html .= '</div>';
