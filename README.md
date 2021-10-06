@@ -18,6 +18,8 @@ Alternatively when using the Debian package of roundcube...
 
 - `ln -s /usr/share/roundcube-banner-ics/ /var/lib/roundcube/plugins/banner_ics`
 
+- `cd /usr/share/roundcube-banner-ics/; composer install`
+
 Add 'banner_ics' to the `$config['plugins']` array in /etc/roundcube/config.inc.php
 
 * Note the underscore in the directoryname contrary to the github repo url. This needs to match with the filename banner_ics.php
