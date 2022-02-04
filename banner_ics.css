@@ -82,3 +82,6 @@
     vertical-align: bottom;
 }
 
+html.dark-mode .ics-event {
+    color: #c5d1d3;
+}
