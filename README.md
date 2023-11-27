@@ -9,6 +9,13 @@ To install, get the plugin with composer in your roundcube directory
 composer require radialapps/banner-ics
 ```
 
+In `config.inc.php`, register the plugin with
+```php
+$config['plugins'] = [
+    'banner_ics',
+];
+```
+
 ## Screenshot
 The plugin adds a dynamic calendar icon along with the information of the event
 <br/>
