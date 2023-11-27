@@ -54,6 +54,7 @@
             $date_format = $rcmail->config->get('date_format', 'D M d, Y');
             $time_format = $rcmail->config->get('time_format', 'h:ia');
             $combined_format = $date_format . ' ' . $time_format;
+            $ymd = 'Y-m-d';
 
             // Parse event
             $ics = $message->get_part_body($a->mime_id);
@@ -63,20 +64,47 @@
             // Make sure we have events
             if (!$ical->hasEvents()) return;
 
+            // Crete timezone objects for calendar timezone and RoundCube UI timezone
+            try {
+                $ui_tz = new DateTimeZone($rcmail->config->get('timezone'));
+            } catch (Exception $e) {
+                $ui_tz = new DateTimeZone(DateTimeZone::UTC);
+            }
+            try {
+                $ical_tz = new DateTimeZone($ical->calendarTimeZone(true));
+            } catch (Exception $e) {
+                // Use UI timezone if the calendar have no timezone specified
+                $ical_tz = $ui_tz;
+            }
+
             // Get first event
             foreach ($ical->events() as &$event) {
-                $dtstart = $event->dtstart_array[2];
-                $dtend = $event->dtend_array[2];
-                $dtstr = $rcmail->format_date($dtstart, $combined_format) . ' - ';
+                $is_all_day = isset($event->dtstart_array[0]['VALUE']) && $event->dtstart_array[0]['VALUE'] === 'DATE';
 
-                // Dont double date if same
-                $df = 'Y-m-d';
-                if (date($df, $dtstart) === date($df, $dtend)) {
-                    $dtstr .= $rcmail->format_date($dtend, $time_format);
+                if ($is_all_day) {
+                    // All day events should use UI timezone to avoid turning dates
+                    $dtstart = new DateTime($event->dtstart, $ui_tz);
+                    $dtend = new DateTime($event->dtend, $ui_tz);
+                    // All day events ends at next day midnight, we should fix the day
+                    $dtend->modify('-1 day');
                 } else {
-                    $dtstr .= $rcmail->format_date($dtend, $combined_format);
+                    // Events with proper time should use calendar timezone.
+                    // Note that if DTSTART/DTEND ends with "Z", UTC is used instead of the given timezone automatically
+                    $dtstart = new DateTime($event->dtstart, $ical_tz);
+                    $dtend = new DateTime($event->dtend, $ical_tz);
                 }
 
+                $is_oneday = $dtstart->format($ymd) === $dtend->format($ymd);
+
+                // Concatenate event date string
+                if ($is_all_day) {
+                    // All day events shouldn't display time
+                    $dtstr = $rcmail->format_date($dtstart, $date_format)
+                            . (!$is_oneday ? ' – ' . $rcmail->format_date($dtend, $date_format) : '');
+                } else {
+                    $dtstr = $rcmail->format_date($dtstart, $combined_format) . ' – '
+                            . ($is_oneday ? $rcmail->format_date($dtend, $time_format) : $rcmail->format_date($dtend, $combined_format));
+                }
                 // Put timezone in date string
                 $dtstr .= ' (' . $rcmail->format_date($dtstart, 'T') . ')';
 
